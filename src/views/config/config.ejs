@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Control</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="/libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/libs/main.css">
+    <style>
+        #content{
+
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="well well-sm">
+                        <form name="new" id="new" class="form-horizontal" method="get" action="/config/save">
+                            <fieldset>
+                                <legend class="text-center header">Configuracion</legend>
+        
+                                <div class="form-group">
+                                    <label for="port">Puerto para servicio Web y Socket</label>
+                                    <input type="text" class="form-control" value="<%=config.port%>" name="port" id="port" aria-describedby="Puerto para levantar servicio web" placeholder="3000">
+                                    <small id="portHelp" class="form-text text-muted">por defecto usa el 3000</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="port">Tipo Impresora</label>
+                                    <select class="form-control" name="typePrinter" id="typePrinter">
+                                        <option value="1">USB</option>
+                                        <option value="2">PrinterPW</option>
+                                    </select>
+                                    <small id="portHelp" class="form-text text-muted"></small>
+                                    
+                                </div>
+                                <div class="form-group imp-pw">
+                                    <label for="pid">Nombre Impresora</label>
+                                    <input type="text" class="form-control" value="<%=config.printer%>" name="printer" id="printer" aria-describedby="identificador PID del dispositivo USB" placeholder="Escriba el nombre de la Impresora">
+                                    <small id="pidHelp" class="form-text text-muted"></small>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group imp-usb col-md-5">
+                                        <label for="vid">Impresora / VID</label>
+                                        <input type="text" class="form-control" value="<%=config.vid%>" name="vid" id="vid" aria-describedby="identificador VID del dispositivo USB" placeholder="0">
+                                        <small id="vidHelp" class="form-text text-muted"></small>
+                                        
+                                    </div>
+                                    <div class="form-group imp-usb col-md-5">
+                                        <label for="pid">Impresora / PID</label>
+                                        <input type="text" class="form-control" value="<%=config.pid%>" name="pid" id="pid" aria-describedby="identificador PID del dispositivo USB" placeholder="0">
+                                        <small id="pidHelp" class="form-text text-muted"></small>
+                                    </div>
+                                    <div class="form-group imp-usb col-md-2">
+                                     <label for="pid">_</label>
+                                    <button type="button" id="findUSBPrinter" class="form-control btn btn-primary btn-sm">Buscar</button>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group usb col-md-6">
+                                        <label for="pid">Host</label>
+
+                                        <input type="text" class="form-control" value="<%=config.host%>" name="host" id="host" aria-describedby="Ingrese el nombre del equipo HOST" placeholder="Ingrese el nombre del equipo HOST">
+                                        <small id="pidHelp" class="form-text text-muted">Solo si Use Host esta activo</small>
+                                    </div>
+                                    
+                                    <div class="form-group usb col-md-6">
+                                        <label for="pid">Cola GET Params</label>
+
+                                        <input type="text" class="form-control" value="<%=config.colaKiosko%>" name="colaKiosko" id="colaKiosko" aria-describedby="identificador PID del dispositivo USB" placeholder="cola1, cola2">
+                                        <small id="pidHelp" class="form-text text-muted"></small>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-gorup">
+                                            <label class="checkbox"><input  id="showKiosko" type="checkbox">modo Kiosko</label>
+                                            
+                                            <label class="checkbox"><input id="showKioskoInSecondDisplay" type="checkbox">ver en Pantalla 2</label>
+
+                                            <label class="checkbox"><input id="useHost" type="checkbox">Usar Host</label>
+                                            
+                                            <input type="hidden" id="showKiosko_txt" name="showKiosko" value="<%=config.showKiosko%>">
+                                            <input type="hidden" id="useHost_txt" name="useHost" value="<%=config.useHost%>">
+                                            <input type="hidden" id="showKioskoInSecondDisplay_txt" name="showKioskoInSecondDisplay" value="<%=config.showKioskoInSecondDisplay%>">
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-12 text-center">
+                                        <button type="submit" class="btn btn-primary btn-lg">Guardar</button>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label id="ip"><%=ip%></label>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+    <script src="/libs/jquery/jquery-3.3.1.min.js"></script>
+    <script src="/libs/bootstrap/js/bootstrap.min.js"></script>
+    <script charset="utf-8">
+    
+    $(document).ready(function(){
+        $('#typePrinter').change((e)=>{
+            let select = $("#typePrinter").val();
+            console.log('valor', select);
+            if(select == "1"){
+                $('.imp-pw').hide();
+                $('.imp-usb').show();
+            }else if(select == "2"){
+                $('.imp-pw').show();
+                $('.imp-usb').hide();
+            }
+        });
+
+        if(<%=config.typePrinter%> == 1){
+            $('.imp-pw').hide();
+            $('.imp-usb').show();
+        }else{
+            $('.imp-pw').show();
+            $('.imp-usb').hide();
+        }
+
+
+        $('#typePrinter').val('<%=config.typePrinter%>');
+
+        $('#useHost').change((e)=>{
+            let val = 0;
+            if($('#useHost').prop('checked')){
+                val =1;
+            }
+            $('#useHost_txt').val(val);
+        });
+
+        $('#showKiosko').change((e)=>{
+            let val = 0;
+            if($('#showKiosko').prop('checked')){
+                val =1;
+            }
+            $('#showKiosko_txt').val(val);
+        });
+
+        $('#showKioskoInSecondDisplay').change((e)=>{
+            let val = 0;
+            if($('#showKioskoInSecondDisplay').prop('checked')){
+                val =1;
+            }
+            $('#showKioskoInSecondDisplay_txt').val(val);
+        });
+
+        $('#useHost').prop( "checked", (<%=config.useHost%>==1)?true:false );
+        $('#showKiosko').prop( "checked", (<%=config.showKiosko%>==1)?true:false );
+        $('#showKioskoInSecondDisplay').prop( "checked", (<%=config.showKioskoInSecondDisplay%>==1)?true:false );
+
+
+        $('#findUSBPrinter').on('click', function(){
+            $.get('/findusb', function(data){
+                console.log(data[0].deviceDescriptor.idVendor, data[0].deviceDescriptor.idProduct);
+
+                $('#vid').val(data[0].deviceDescriptor.idVendor);
+                $('#pid').val(data[0].deviceDescriptor.idProduct);
+            });
+        })
+
+    });
+
+    </script>
+</body>
+</html>

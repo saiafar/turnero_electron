@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Stats</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="/libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/libs/style.bundle.min.css">
+    <link rel="stylesheet" href="/libs/bootstrap/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="/libs/morris/morris.css">
+    <style>
+      #weeklyDatePicker{
+        width: 300px;
+      }
+
+      .bootstrap-datetimepicker-widget tr:hover {
+          background-color: #808080;
+      }
+
+      .icon-clientes svg{
+        width: 60px !important;
+        height: 60px !important;
+      }
+
+      .container{
+        margin-top: 20px;
+      }
+    </style>
+</head>
+
+<body id="kt_body">
+  <div class="container">  
+    <!---      -->  
+    <div class="row">
+      <div class="col-xl-6">
+        <!--begin::Tiles Widget 21-->
+        <div class="card card-custom gutter-b">
+          <!--begin::Body-->
+          <div class="card-body d-flex flex-column p-0" style="position: relative;">
+            <!--begin::Stats-->
+            <div class="row">
+            <div class="flex-grow-1 card-spacer pb-0 col-xl-6">
+              <span class="svg-icon svg-icon-2x svg-icon-info icon-clientes">
+                <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Group.svg-->
+                <svg style="height: 4rem!important;    width: 4rem!important; margin-top: -30px;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                  <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <polygon points="0 0 24 0 24 24 0 24"></polygon>
+                    <path d="M18,14 C16.3431458,14 15,12.6568542 15,11 C15,9.34314575 16.3431458,8 18,8 C19.6568542,8 21,9.34314575 21,11 C21,12.6568542 19.6568542,14 18,14 Z M9,11 C6.790861,11 5,9.209139 5,7 C5,4.790861 6.790861,3 9,3 C11.209139,3 13,4.790861 13,7 C13,9.209139 11.209139,11 9,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+                    <path d="M17.6011961,15.0006174 C21.0077043,15.0378534 23.7891749,16.7601418 23.9984937,20.4 C24.0069246,20.5466056 23.9984937,21 23.4559499,21 L19.6,21 C19.6,18.7490654 18.8562935,16.6718327 17.6011961,15.0006174 Z M0.00065168429,20.1992055 C0.388258525,15.4265159 4.26191235,13 8.98334134,13 C13.7712164,13 17.7048837,15.2931929 17.9979143,20.2 C18.0095879,20.3954741 17.9979143,21 17.2466999,21 C13.541124,21 8.03472472,21 0.727502227,21 C0.476712155,21 -0.0204617505,20.45918 0.00065168429,20.1992055 Z" fill="#000000" fill-rule="nonzero"></path>
+                  </g>
+                </svg>
+                <!--end::Svg Icon-->
+              </span>
+              <div id="atendidos" class="font-weight-boldest font-size-h3 pt-2" style="display: inline-block; font-size: 60px !important">0</div>
+              <div class="text-muted font-weight-bold">Clientes Atendidos</div>
+            </div>
+            <!--end::Stats-->
+
+            <div class="flex-grow-1 card-spacer pb-0 col-xl-6">
+              <span class="svg-icon svg-icon-2x svg-icon-info icon-clientes">
+                <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Group.svg-->
+                <svg style="height: 4rem!important;    width: 4rem!important; margin-top: -30px;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                  <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                      <rect x="0" y="0" width="24" height="24"/>
+                      <path d="M10.9630156,7.5 L11.0475062,7.5 C11.3043819,7.5 11.5194647,7.69464724 11.5450248,7.95024814 L12,12.5 L15.2480695,14.3560397 C15.403857,14.4450611 15.5,14.6107328 15.5,14.7901613 L15.5,15 C15.5,15.2109164 15.3290185,15.3818979 15.1181021,15.3818979 C15.0841582,15.3818979 15.0503659,15.3773725 15.0176181,15.3684413 L10.3986612,14.1087258 C10.1672824,14.0456225 10.0132986,13.8271186 10.0316926,13.5879956 L10.4644883,7.96165175 C10.4845267,7.70115317 10.7017474,7.5 10.9630156,7.5 Z" fill="#000000"/>
+                      <path d="M7.38979581,2.8349582 C8.65216735,2.29743306 10.0413491,2 11.5,2 C17.2989899,2 22,6.70101013 22,12.5 C22,18.2989899 17.2989899,23 11.5,23 C5.70101013,23 1,18.2989899 1,12.5 C1,11.5151324 1.13559454,10.5619345 1.38913364,9.65805651 L3.31481075,10.1982117 C3.10672013,10.940064 3,11.7119264 3,12.5 C3,17.1944204 6.80557963,21 11.5,21 C16.1944204,21 20,17.1944204 20,12.5 C20,7.80557963 16.1944204,4 11.5,4 C10.54876,4 9.62236069,4.15592757 8.74872191,4.45446326 L9.93948308,5.87355717 C10.0088058,5.95617272 10.0495583,6.05898805 10.05566,6.16666224 C10.0712834,6.4423623 9.86044965,6.67852665 9.5847496,6.69415008 L4.71777931,6.96995273 C4.66931162,6.97269931 4.62070229,6.96837279 4.57348157,6.95710938 C4.30487471,6.89303938 4.13906482,6.62335149 4.20313482,6.35474463 L5.33163823,1.62361064 C5.35654118,1.51920756 5.41437908,1.4255891 5.49660017,1.35659741 C5.7081375,1.17909652 6.0235153,1.2066885 6.2010162,1.41822583 L7.38979581,2.8349582 Z" fill="#000000" opacity="0.3"/>
+                  </g>
+                </svg>
+                <!--end::Svg Icon-->
+              </span>
+              <div id="espera" class="font-weight-boldest font-size-h3 pt-2" style="display: inline-block; font-size: 60px !important">0</div>
+              <div class="text-muted font-weight-bold">Tiempo estimado de espera</div>
+            </div>
+          </div>
+          </div>
+          <!--end::Body-->
+        </div>
+        <!--end::Tiles Widget 21-->
+      </div>
+      <div class="col-xl-6">
+        <!--begin::Tiles Widget 25-->
+        <div class="card card-custom bgi-no-repeat bgi-size-cover gutter-b bg-primary">
+          <div class="card-body d-flex">
+            <div class="d-flex py-5 flex-column align-items-start flex-grow-1">
+              <div class="flex-grow-1">
+                <a href="#" class="text-white font-weight-bolder font-size-h3">Estadisticas Turnomatic</a>
+                <p class="text-white opacity-75 font-weight-bold mt-3">Seleccione una semana</p>
+                    <input class="form-control" type='text' id='weeklyDatePicker' placeholder="Seleccione" />
+ 
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--end::Tiles Widget 25-->
+      </div>
+    </div>
+
+    <!--    -->
+    <div class="row">
+      <div class="col-md-10">
+
+        <div id="myfirstchart" style="height: 250px;"></div>
+      </div>
+      
+    </div>
+    
+    <div id="Semana" style="height: 250px;"></div>
+  </div>
+    
+    
+
+
+
+<script src="/socket.io/socket.io.js" charset="utf-8"></script>
+<script src="/libs/jquery/jquery-2.0.3.min.js"></script>
+<script src="/libs/bootstrap/js/bootstrap.min.js"></script>
+<script src="/libs/moment.js"></script>
+<script src="/libs/bootstrap/js/bootstrap-datepicker.js"></script>
+<script src="/libs/raphael-2.1.2.min.js"></script>
+<script src="/libs/morris/morris.js"></script>
+
+<script>
+
+    moment.locale('es', {
+      week: { dow: 0 } // Monday is the first day of the week
+    });
+
+    $("#weeklyDatePicker").datetimepicker({
+      format: 'DD-MM-YYYY'
+    });
+
+    let firstDate = moment().day(0).format("DD-MM-YYYY");
+    let lastDate = moment().day(6).format("DD-MM-YYYY");
+    $("#weeklyDatePicker").val(firstDate + " - " + lastDate);
+    //Get the value of Start and End of Week
+    $('#weeklyDatePicker').on('dp.change', function (e) {
+      var value = $("#weeklyDatePicker").val();
+      firstDate = moment(value, "DD-MM-YYYY").day(0).format("DD-MM-YYYY");
+      lastDate =  moment(value, "DD-MM-YYYY").day(6).format("DD-MM-YYYY");
+      $("#weeklyDatePicker").val(firstDate + " - " + lastDate);
+    });
+
+
+
+    var txt = document.createElement("textarea");
+    txt.innerHTML = '<%=result%>';
+    let result = txt.value;
+    result = JSON.parse(result);
+
+    let aux_prom_espera = 0;
+    let turnos_atendidos = 0;
+    let turnos_abandonados = 0;
+
+    let turnos_semana = {0:0, 1:0, 2:0, 3:0, 4:0, 5:0, 6:0};
+    //console.log('turnos tomados:', result.length);
+    result.forEach((turno, i)=>{
+        
+        if(turno.espera != null){
+
+            //Separar por dia de la semana
+            let aux = new Date(turno.tomo).getDay();
+            turnos_semana[aux]++;
+
+            //Separar por Hora del día
+            let aux_hora = new Date(result[i+1].atendido);
+
+            console.log('hora:',aux_hora.getHours());
+
+            // PARA CALCULAR PROMERDIO DE ESPERA
+            let aux_seconds = turno.espera.split(':');
+            let espera_in_seconds = (+aux_seconds[0]) * 60 * 60 + (+aux_seconds[1]) * 60 + (+aux_seconds[2]);
+            aux_prom_espera += espera_in_seconds; 
+            
+            //PARA CALCULAR TIEMPO DE ANTENCION ENTRE TURNOS
+            //console.log(turno.atendido)
+            if((i+1) < result.length){
+                let dif_entre_turnos = (new Date(result[i+1].atendido) - new Date(turno.atendido)) / 1000 / 60;
+                //console.log(turno.atendido, result[i+1].atendido, dif_entre_turnos)
+                if(dif_entre_turnos >= 0.5){
+                    //console.log('atendido')
+                    turnos_atendidos++;
+                }else{
+                    //console.log('abandonado')
+                    turnos_abandonados++;
+                }
+            }else if((i+1) == result.length){
+                //console.log('atendido');
+                turnos_atendidos++;
+            }
+        }
+    });
+
+    //console.log(turnos_semana);
+    let prom_espera = aux_prom_espera
+    console.log('promedio espera:', Math.round(prom_espera / 60), 'min');
+    console.log('turnos tomados:', result.length);
+    console.log('turnos atendidos', turnos_atendidos);
+    console.log('turnos abandonados', turnos_abandonados);
+
+    $('#atendidos').html(turnos_atendidos);
+    $('#espera').html(Math.round(prom_espera / 60)+'<spam style="font-size:14px">min</spam>');
+
+    new Morris.Line({
+  // ID of the element in which to draw the chart.
+  element: 'myfirstchart',
+  // Chart data records -- each entry in this array corresponds to a point on
+  // the chart.
+  data: [
+    { Hora: '08:00', Atendidos: 20 },
+    { Hora: '10:00', Atendidos: 10 },
+    { Hora: '12:00', Atendidos: 5 },
+    { Hora: '14:00', Atendidos: 5 },
+    { Hora: '16:00', Atendidos: 20 }
+  ],
+  // The name of the data record attribute that contains x-values.
+  xkey: 'Hora',
+  // A list of names of data record attributes that contain y-values.
+  ykeys: ['Atendidos'],
+  // Labels for the ykeys -- will be displayed when you hover over the
+  // chart.
+  labels: ['Atendidos']
+});
+
+const monthNames = ["", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab", "Dom"];
+new Morris.Bar({
+  element: 'Semana',
+  data: [
+    {x: 'Domingo', a: turnos_semana[0]},
+    {x: 'Lunes', a: turnos_semana[1]},
+    {x: 'Martes', a: turnos_semana[2]},
+    {x: 'Miercoles', a: turnos_semana[3]},
+    {x: 'Jueves', a: turnos_semana[4]},
+    {x: 'Viernes', a: turnos_semana[5]},
+    {x: 'Sabado', a: turnos_semana[6]},
+  ],
+  xkey: 'x',
+  ykeys: ['a'],
+  labels: ['Atendidos']
+}).on('click', function(i, row){
+  console.log(i, row);
+});
+</script>
+</body>
+</html>

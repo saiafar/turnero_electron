@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Kiosko</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="/libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/libs/main.css">
+    <style type="text/css">
+        body{
+            background: #333;
+        }
+
+        .ticket{
+            background: #FFF;
+            border-radius: 20px;
+            height: 300px;
+            width: 300px;
+            position: absolute;
+            top:50%;
+            left: 50%;
+            margin-top: -150px;
+            margin-left: -150px;
+            text-align: center;
+            padding: 30px;
+        }
+
+        #turno{
+            font-size: 140px;
+        }
+
+        .main-ct{
+            
+        }
+
+        .ct-center{
+            position: absolute;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    min-height: 100%;
+    width: 100%;
+        }
+
+
+    </style>
+</head>
+<body>
+
+   
+        <div class="ct-center">
+            <% colas.forEach( cola => { %>
+                <button data-cola="<%=cola%>" class="btn-turno btn btn-primary">Tomar Número<br><%=cola%></button>
+            <% }) %>
+        </div>
+        
+    
+
+
+<div class="ticket" style="display: none">
+Su turno es el
+    <div id="turno">
+
+    </div>
+    tiene <span id="behind"></span> turnos por delante
+</div>
+
+<script src="/socket.io/socket.io.js" charset="utf-8"></script>
+<script src="/libs/jquery/jquery-3.3.1.min.js"></script>
+<script src="/libs/bootstrap/js/bootstrap.min.js"></script>
+
+<script>
+const socket = io();
+var attempts = 1;
+
+$(document).ready(function(){
+    $('.btn-turno').on('click', function(){
+        $(this).attr('disabled', 'disabled');
+        $(this).addClass('btn-danger');
+        getTurn($(this).data('cola'));
+    });
+});
+
+function getTurn(cola){
+        console.log('getTurno', cola);
+        socket.emit('cola:getTurn', {
+            cola: cola
+        });
+}
+
+socket.on('cola:behind', (data) => {
+    $('#turno').text(data.turno);
+    $('#behind').text(data.behind);
+    $('.btn-turno').hide();
+    $('.ticket').show();
+
+    setTimeout(function(){
+        restoreButton();
+    }, 4000);
+})
+
+function restoreButton(){
+    $('.ticket').hide();
+    $('.btn-turno').show();
+    $('.btn-turno').removeAttr('disabled');
+    $('.btn-turno').removeClass('btn-danger');
+}
+</script>
+</body>
+</html>

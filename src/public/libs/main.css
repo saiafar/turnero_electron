@@ -1,0 +1,43 @@
+
+
+.btn-turno{
+    /*position: absolute;
+    top:50%;
+    left: 50%;
+    margin-top: -100px;*/
+
+    width: 400px;
+    height: 200px;
+    font-size: 40px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.btn-1{
+    margin-left: -200px;
+}
+
+.btn-2{
+    margin-left: 20px;
+}
+.btn-2:first-child{
+    margin-left: -420px !important;
+}
+
+.numero{
+    display: none;
+    position: absolute;
+    top:50%;
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -200px;
+    width: 400px;
+    height: 200px;
+    font-size: 40px;
+}
+
+#input-custom{
+    width: 100px !important;
+    float: left;
+    margin-right: 10px;
+}

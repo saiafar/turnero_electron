@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Control</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="/libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/libs/main.css">
+    <style>
+        body{
+            background: #333;
+        }
+
+        .contador_ct{
+            color: #FFF;
+            text-align: center;
+            border-radius: 100px;
+            background: #4c4b4b;
+            position: absolute;
+            width: 200px;
+            height: 130px;
+            padding-top: 20px;
+            top: 50px;
+            left: 50%;
+            margin-left: -100px;
+        }
+
+        .contador_ct div{
+            font-size: 60px;
+            margin-top: -15px;
+            font-weight: bold;
+        }
+
+        .contador-next{
+            background: #333333;
+        }
+
+        .contador-alert{
+            background: #f84e4e;
+        }
+    </style>
+</head>
+<body>
+<button class="btn-1 btn-turno btn btn-primary">Siguiente</button>
+<button  data-toggle="modal" data-target="#configModal" id="config" type="button" class="btn btn-outline-success">Config</button>
+
+<div class="contador_ct">
+    Atendiendo al <div id="contador"></div>
+</div>
+
+
+<div class="modal fade" id="configModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Opciones</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-1">
+
+                        </div>
+                        <div class="col-sm-10">
+
+                            <div style="margin: 10px">
+                                <button id="btn-reset" class="btn btn-warning">Resetear cola</button>
+                            </div>
+
+
+                            <div style="margin: 10px">
+                                <div class="pull-left">llamar al Nro.</div>
+                                <input id="input-custom" type="text" class="form-control">
+                                <button id="btn-llamar" class="btn btn-primary">Llamar</button>
+                            </div>
+                        </div>
+                        <div class="col-sm-1">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/socket.io/socket.io.js" charset="utf-8"></script>
+<script src="/libs/jquery/jquery-3.3.1.min.js"></script>
+<script src="/libs/bootstrap/js/bootstrap.min.js"></script>
+<script src="/controllers/control.js" charset="utf-8"></script>
+
+<script>
+
+const socket = io();
+
+
+
+var attempts = 1;
+var attempts2 = 1;
+$(document).ready(function(){
+    console.log({cola:'<%=cola%>'});
+
+    socket.emit('cola:current', {cola:'<%=cola%>'});
+
+    socket.on('cola:show:<%=cola%>', (data) => {
+        let cola = data.cola;
+        let next =  data.data;
+        if(next > -1){
+            $('#contador').text(next);
+        }else{
+            $('.contador_ct').addClass('contador-alert');
+            setTimeout(function(){
+                $('.contador_ct').removeClass('contador-alert');
+            }, 2000)
+        }
+    })
+        
+    $('.btn-turno').on('click', function(){
+        socket.emit('cola:next', {cola:'<%=cola%>'});
+    });
+
+    /*$('.btn-turno').on('click', function(){
+        $(this).attr('disabled', 'disabled');
+        $(this).addClass('btn-warning');
+
+        getNext();
+    });*/
+
+    $('#btn-reset').on('click', function(){
+        $('#configModal').modal('hide');
+        socket.emit('cola:reset', {cola:'<%=cola%>'});
+    });
+
+    $('#btn-llamar').on('click', function(){
+
+        turn = $('#input-custom').val();
+        $('#configModal').modal('hide');
+        socket.emit('cola:setturno', {cola:'<%=cola%>', turno: turn});
+    });
+});
+
+/*getCurrent();
+
+function getCurrent(){
+    $.get('{!! url('getcurrent/'.$cola_id) !!}', function(data){
+        if(data > -1){
+            $('#contador').text(data);
+        }
+        attempts2 = 1;
+    }).fail(function(){
+        console.log('error en la conexion');
+
+        console.log('Reintentando peticion...     intento #'+(attempts++));
+
+        if(attempts2 <= 3){
+            getCurrent();
+        }else{
+            console.log('Se alcanzo el numero maximo de intentos...');
+            attempts2 = 1;
+        }
+
+    });
+}*/
+/*
+function getNext(){
+    $.get('{!! url('getnext/'.$cola_id) !!}', function(data){
+        restoreButton();
+        if(data == -1){
+            $('.contador_ct').addClass('contador-alert');
+            setTimeout(function(){
+                $('.contador_ct').removeClass('contador-alert');
+            }, 1000);
+        }else{
+            $('#contador').text(data);
+        }
+        attempts = 1;
+    }).fail(function(jqXHR, textStatus, errorThrown){
+        if(jqXHR.status == 500)
+            console.log('error 500');
+
+        if(jqXHR.status == 404)
+            console.log('error 500');
+
+        console.log('Reintentando peticion...     intento #'+(attempts++));
+
+        if(attempts <= 3){
+            getNext();
+        }else{
+            console.log('Se alcanzo el numero maximo de intentos...');
+            attempts = 1;
+
+            restoreButton();
+        }
+
+    }).always(function() {
+
+    });
+}
+*/
+function restoreButton(){
+    $('.btn-turno').removeClass('btn-warning');
+    $('.btn-turno').removeAttr('disabled');
+}
+</script>
+</body>
+</html>

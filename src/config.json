@@ -1,0 +1,9 @@
+{services:{
+    port:3000
+},
+printer:{
+    vid: 0,
+    pid:0
+},
+printer2:'test'
+}
